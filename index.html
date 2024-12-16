@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="img/favicon.png"
+      sizes="192x192"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Travel.com</title>
+  </head>
+
+  <body>
+    <main>
+      <header>
+        <nav class="navbar">
+          <div class="navbar-logo">Voyage</div>
+          <ul class="navbar-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="about.html">À propos</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+          <?php if ($userIsLoggedIn) { ?>
+
+          <details>
+            <summary>
+              <!-- <%= user.name %> -->
+              <i class="fas fa-user"></i>
+            </summary>
+            <ul>
+              <li><a href="dashboard.php">Profil</a></li>
+              <li><a href="logout.php">Déconnexion</a></li>
+            </ul>
+          </details>
+          <?php } else { ?>
+          <div class="navbar-auth-buttons">
+            <a href="login.html" class="auth-btn" id="btn-login">Se connecter</a>
+            <a href="register.html" class="auth-btn" id="btn-register"
+              >S'inscrire</a
+            >
+          </div>
+          <?php } ?>
+
+        </nav>
+        <div class="header-banner">
+          <div class="banner-content">
+            <h1>Offres pour toutes les saisons</h1>
+            <p>Des offres de vols incroyables pour toutes les destinations</p>
+            <a href="about.html">En savoir plus<span>&rarr;</span> </a>
+          </div>
+          <form class="search-form" action="/api/search-flight" method="post">
+            <div class="radio-input">
+              <input
+                type="radio"
+                name="flightOptions"
+                id="roundTrip"
+                class="radio-btn"
+                value="round-trip"
+                checked
+              />
+              <label for="roundTrip">Aller-retour</label>
+              <input
+                type="radio"
+                name="flightOptions"
+                id="oneWay"
+                class="radio-btn"
+                value="one-way"
+              />
+              <label for="oneWay">Aller simple</label>
+            </div>
+            <div class="search-bar" id="searchBar">
+              <div class="row row-1">
+                <div class="text-input">
+                  <input
+                    type="text"
+                    placeholder="Départ de"
+                    id="originLocation"
+                    name="originLocationCode"
+                  />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="100%"
+                    height="100%"
+                    viewBox="0 0 22 11"
+                    fit=""
+                    preserveAspectRatio="xMidYMid meet"
+                    focusable="false"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M21.969 1.496c.234.677-.872 1.445-2.268 1.928-.696.242-3.198 1.108-5.68 1.966-.28.391-.773 1.076-.995 1.373-.22.296-.53.589-.89.713-.363.127-1.733.6-1.733.6l.719-1.682c-1.282.442-2.294.794-2.652.917-1.024.354-3.516.383-4.523.432-1.009.051-1.204-.22-1.534-.634S0 3.835 0 3.835l2.205-.357S5.027 4.81 5.537 5.002c.51.193.73.124 1.172-.05 1.58-.62 9.198-3.947 10.634-4.444 2.05-.71 4.39.311 4.626.988m-6.411 8.223a.367.367 0 1 1 0 .734H8.394a.367.367 0 1 1 0-.734z"
+                    ></path>
+                  </svg>
+                  <div
+                    id="originLocationResults"
+                    class="autocomplete-results"
+                  ></div>
+                </div>
+                <div class="text-input">
+                  <input
+                    type="text"
+                    placeholder="Arrivée à"
+                    id="destinationLocation"
+                    name="destinationLocationCode"
+                  />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="100%"
+                    height="100%"
+                    viewBox="0 0 21 10"
+                    fit=""
+                    preserveAspectRatio="xMidYMid meet"
+                    focusable="false"
+                  >
+                    <path
+                      d="M16.739 3.053c2.016 0 3.761 1.607 3.761 2.273s-1.203 1.005-2.575 1.005h-.993a.643.643 0 1 1-.909 0H12.34c-.365.258-1.006.71-1.292.905-.283.191-.644.355-.999.355H8.346l1.142-1.26H6.881c-1.007 0-3.204-.732-4.103-.995-.9-.262-.989-.559-1.154-1.023S.5.705.5.705l2.046.357s2.071 2.026 2.462 2.351c.389.325.601.33 1.043.312 1.576-.064 9.277-.672 10.688-.672m-2.913 6.058a.34.34 0 1 1 0 .683H7.17a.341.341 0 1 1 0-.683z"
+                    ></path>
+                  </svg>
+                  <div
+                    id="destinationLocationResults"
+                    class="autocomplete-results"
+                  ></div>
+                </div>
+                <div class="select-form">
+                  <select name="travelClass" id="flightClass">
+                    <option value="ECONOMY" selected>Économie</option>
+                    <option value="PREMIUM_ECONOMY">Économie Premium</option>
+                    <option value="BUSINESS">Classe Affaires</option>
+                    <option value="FIRST">Première Classe</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row row-2">
+                <div class="date-input" id="departureDate">
+                  <label for="departureDateInput">Date de départ</label>
+                  <input
+                    type="date"
+                    name="departureDate"
+                    id="departureDateInput"
+                  />
+                </div>
+                <div class="date-input" id="returnDateContainer">
+                  <label for="returnDateInput">Date de retour</label>
+                  <input type="date" name="returnDate" id="returnDateInput" />
+                </div>
+                <input
+                  type="submit"
+                  id="search-button"
+                  value="Rechercher un vol"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </header>
+      <section>
+        <div class="section-content">
+          <!-- Filters Section -->
+          <div class="filters">
+            <h3>Filters</h3>
+            <form id="filter-form">
+              <label for="departure">Departure Airport</label>
+              <input
+                type="text"
+                id="departure"
+                name="departure"
+                placeholder="Enter IATA Code"
+              />
+
+              <label for="arrival">Arrival Airport</label>
+              <input
+                type="text"
+                id="arrival"
+                name="arrival"
+                placeholder="Enter IATA Code"
+              />
+
+              <label for="time">Date</label>
+              <input type="time" id="time" name="time" />
+
+              <label for="price">Max Price</label>
+              <input
+                type="number"
+                id="price"
+                name="price"
+                placeholder="Enter Max Price"
+              />
+
+              <button type="submit" class="btn-apply">Apply Filters</button>
+            </form>
+          </div>
+
+          <!-- Results Section -->
+          <div class="results" id="results">
+            <div class="result-item">
+              <div class="result-info">
+                <h3>Flight ID: 900</h3>
+                <div class="flight-info">
+                  <p>From: <strong>CDG</strong> - To: <strong>JFK</strong></p>
+                  <p>Departure: <span>14:55 (2024-12-20)</span></p>
+                  <p>Arrival: <span>17:48 (2024-12-20)</span></p>
+                  <p>Duration: <span>5h 54m</span></p>
+                </div>
+              </div>
+              <div class="result-actions">
+                <p>Price: <strong>89.57 EUR</strong></p>
+                <button class="btn-book">Book Now</button>
+              </div>
+            </div>
+            <!-- Additional results will be dynamically added here -->
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-content">
+        <div class="footer-logo">Travel.com</div>
+        <p>&copy; 2023 Travel.com | Tous droits réservés.</p>
+      </div>
+    </footer>
+    <script src="js/index.js"></script>
+    <?php
+    // Définir vos variables Amadeus
+    $amadeusClientId = "Adk9fylYn5gLVVRdFIzW3XqWcORiX34k";
+    $amadeusClientSecret = "vB50iAf67g8lIpKA";
+    ?>
+    
+    <script>
+      window.env = {
+        AMADEUS_CLIENT_ID: "<?= $amadeusClientId ?>",
+        AMADEUS_CLIENT_SECRET: "<?= $amadeusClientSecret ?>",
+      };
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="img/favicon.png"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="register.css">
+    <title>Travel - Register</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <nav class="navbar">
+          <div class="navbar-logo">Travel</div>
+            <p><a href="/" class="home-link">Retour à l'accueil</a></p>
+        </nav>
+      </header>
+      <section class="sign-section">
+        <div class="sign-container">
+          <div class="sign-header">
+            <h3>S'inscrire maintenant</h3>
+            <p>Inscrivez-vous à Travel.com et accédez à nos services.</p>
+          </div>
+          <form class="sign-form"  action="registre.php" method="POST">
+            <div class="input-container">
+              <label for="name">Nom Complet</label>
+              <input type="text" name="name" id="name" required />
+            </div>
+            <div class="input-container">
+              <label for="email">Email</label>
+              <input type="email" name="email" id="email" required />
+            </div>
+            <div class="input-container">
+              <label for="password">Mot de Passe</label>
+              <input type="password" name="password" id="password" required />
+            </div>
+
+            <input type="submit" value="S'inscrire" />
+            <div>
+              <p>Déjà un compte? <a href="/login">Se connecter</a></p>
+              <!-- <p><a href="/">Retour à l'accueil</a></p> -->
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   
+  </body>
+</html>

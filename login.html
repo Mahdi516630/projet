@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="img/favicon.png"
+      sizes="192x192"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="login.css" />
+    <title>Travel - Login</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <nav class="navbar">
+          <div class="navbar-logo">Travel</div>
+          <p><a href="index.html" class="home-link">Retour à l'accueil</a></p>
+        </nav>
+      </header>
+      <section class="sign-section">
+        <div class="sign-container">
+          <div class="sign-header">
+            <h3>Se connecter maintenant</h3>
+            <p>
+              Connectez-vous à votre compte Travel.com et accédez à nos
+              services.
+            </p>
+          </div>
+          <form class="sign-form" action="login.php" method="POST">
+            <div class="input-container">
+              <label for="email">Email</label>
+              <input type="email" name="email" id="email" required />
+            </div>
+            <div class="input-container">
+              <label for="password">Mot de Passe</label>
+              <input type="password" name="password" id="password" required />
+            </div>
+            <!-- <p><a href="forgot-password.html">Forgot Password?</a></p> -->
+            <input type="submit" value="Se connecter" />
+            <p>Pas de compte? <a href="register.html">S'inscrire</a></p>
+          </form>
+        </div>
+      </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+  </body>
+</html>
